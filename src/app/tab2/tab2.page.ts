@@ -11,6 +11,7 @@ export class Tab2Page {
 
   constructor(public photoService: PhotoService, public actionSheetController: ActionSheetController) {}
 
+  // tslint:disable-next-line:use-lifecycle-interface
   async ngOnInit() {
     await this.photoService.loadSaved();
   }

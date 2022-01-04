@@ -12,7 +12,7 @@ import { Platform } from '@ionic/angular';
 })
 export class PhotoService {
   public photos: UserPhoto[] = [];
-  private PHOTO_STORAGE: string = 'photos';
+  private PHOTO_STORAGE = 'photos';
 
   constructor(private platform: Platform) {}
 
@@ -24,7 +24,7 @@ export class PhotoService {
     // If running on the web...
     if (!this.platform.is('hybrid')) {
       // Display the photo by reading into base64 format
-      for (let photo of this.photos) {
+      for (const photo of this.photos) {
         // Read each saved photo's data from the Filesystem
         const readFile = await Filesystem.readFile({
           path: photo.filepath,
@@ -108,6 +108,7 @@ export class PhotoService {
       return file.data;
     } else {
       // Fetch the photo, read as a blob, then convert to base64 format
+      // tslint:disable-next-line:no-non-null-assertion
       const response = await fetch(cameraPhoto.webPath!);
       const blob = await response.blob();
 
@@ -142,7 +143,7 @@ export class PhotoService {
         resolve(reader.result);
       };
       reader.readAsDataURL(blob);
-    });
+    })
 }
 
 export interface UserPhoto {
